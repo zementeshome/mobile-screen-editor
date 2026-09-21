@@ -33,7 +33,7 @@ const PopoverDropdown = ({
   const currentBackgroundColor = buttonBackgroundColor || "#ffffff";
 
   return (
-    <div className="flex gap-2 mb-[3rem]" data-testid="popover-container">
+    <div className="flex gap-2" data-testid="popover-container">
       <Popover data-testid="popover">
         <PopoverTrigger asChild>
           <Button

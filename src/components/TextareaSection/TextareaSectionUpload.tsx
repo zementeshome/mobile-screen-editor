@@ -8,35 +8,18 @@ export type TextAreaSectionProps = {
   onChange: (config: TextArea) => void;
 };
 
-const TextareaSection = ({ config, onChange }: TextAreaSectionProps) => {
+const TextareaSectionUpload = ({ config, onChange }: TextAreaSectionProps) => {
   const { title, description, titleColor, descriptionColor } = config;
   const currentTitleColor = titleColor || "#ffffff";
   const currentDescColor = descriptionColor || "#4b5563";
 
   return (
     <div
-      className="flex flex-col gap-[0.5rem] w-full max-w-xs mx-auto"
+      className="flex flex-col gap-4 w-full max-w-xs mx-auto"
       data-testid="textarea-container"
     >
-      {title && (
-        <h2
-          style={{ color: currentTitleColor }}
-          className="text-xl font-bold transition-colors"
-          data-testid="textarea-title"
-        >
-          {title}
-        </h2>
-      )}
-      {description && (
-        <p
-          style={{ color: currentDescColor }}
-          className="whitespace-pre-wrap transition-colors"
-          data-testid="textarea-description"
-        >
-          {description}
-        </p>
-      )}
-      {/* <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2">
+        <h4 className="mb-[0.5rem] font-semibold">Title & Description</h4>
         <Input
           placeholder="Title"
           value={title}
@@ -76,9 +59,9 @@ const TextareaSection = ({ config, onChange }: TextAreaSectionProps) => {
         }
         cta1Text="Title color"
         cta2Text="Desc color"
-      /> */}
+      />
     </div>
   );
 };
 
-export default TextareaSection;
+export default TextareaSectionUpload;

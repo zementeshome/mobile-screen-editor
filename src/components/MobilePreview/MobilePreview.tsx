@@ -39,7 +39,7 @@ const MobilePreview = ({ children }: MobilePreviewProps) => {
 
   return (
     <Card
-      className="relative mx-auto rounded-[2.75rem] w-[20rem] border-[0.875rem] border-zinc-950 bg-zinc-950 shadow-2xl overflow-hidden sm:w-[31.25rem] pt-[1rem]"
+      className="relative mx-auto rounded-[2.75rem] w-[20rem] border-[0.875rem] border-zinc-950 bg-zinc-950 shadow-2xl overflow-hidden sm:w-[30rem] pt-[1rem]"
       data-testid="mobile-preview"
       role="main"
     >

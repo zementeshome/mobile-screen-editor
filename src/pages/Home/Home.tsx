@@ -12,6 +12,10 @@ import { ChevronUp, ChevronDown } from "lucide-react";
 import Header from "../../components/Header/Header";
 import MobilePreview from "../../components/MobilePreview/MobilePreview";
 import { usePreview } from "../../contexts/HomeContext";
+import ReactivUpload from "../../components/CarouselSection/CarouselUpload";
+import CTASectionUpload from "../../components/CTASection/CTAUpload";
+import TextareaSectionUpload from "../../components/TextareaSection/TextareaSectionUpload";
+import { Separator } from "../../shadcn-ui-components/separator";
 
 const Home = () => {
   const {
@@ -87,7 +91,7 @@ const Home = () => {
 
   return (
     <div
-      className="flex flex-col items-center gap-4 mt-4 w-max m-auto w-full"
+      className="flex flex-col items-center mt-4 w-max m-auto w-full"
       data-testid="homepage"
     >
       <Header header="Home Screen Editor" />
@@ -121,7 +125,7 @@ const Home = () => {
         </ul>
       </nav>
       <div
-        className="flex gap-4 items-center mb-[1rem]"
+        className="flex gap-4 items-center"
         data-testid="import-export-section"
       >
         <Button
@@ -134,10 +138,10 @@ const Home = () => {
         <div>
           <input
             type="file"
-            ref={fileInputRef} /* Add a ref here */
+            ref={fileInputRef}
             accept="application/json"
             onChange={handleImportFile}
-            className="hidden" /* Standard hidden works fine with this approach */
+            className="hidden"
             data-testid="import-input"
           />
           <Button
@@ -154,67 +158,103 @@ const Home = () => {
           {importError}
         </p>
       )}
-      <MobilePreview>
-        <div className="flex flex-col gap-4 w-full max-w-xs mt-2 sm:max-w-md">
-          {sections.map((section, index) => (
+      <Separator className="border-1 border-white border-dashed m-[1.5rem]" />
+      <div className="flex gap-[5rem]">
+        <div
+          data-testid="upload-section"
+          className="flex flex-col space-y-[8rem]"
+        >
+          <h3 className="mb-[2rem] font-semibold text-white">Editor</h3>
+          {sections.map((section) => (
             <div
               key={section.id}
               className="relative flex gap-5 flex-col sm:flex-row-reverse"
             >
-              <div className="flex justify-center gap-3 pt-2 pl-[0.5rem]">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  disabled={index === 0}
-                  onClick={() => moveSection(index, -1)}
-                  aria-label="move up"
-                >
-                  <ChevronUp className="h-4 w-4" />
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  disabled={index === sections.length - 1}
-                  onClick={() => moveSection(index, 1)}
-                  aria-label="move down"
-                >
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-                <Button
-                  type="button"
-                  size="sm"
-                  className="bg-red-200 text-red-600 hover:bg-red-300 border border-red-600"
-                  onClick={() => deleteSection(section.id)}
-                >
-                  x
-                </Button>
-              </div>
-              <div className="flex-1 relative">
-                {section.type === "carousel" && (
-                  <ReactivCarousel
-                    config={section.config as Carousel}
-                    onChange={(config) => updateSection(section.id, config)}
-                  />
-                )}
-                {section.type === "textarea" && (
-                  <TextaraSection
-                    config={section.config as TextArea}
-                    onChange={(config) => updateSection(section.id, config)}
-                  />
-                )}
-                {section.type === "cta" && (
-                  <CTASection
-                    config={section.config as CTA}
-                    onChange={(config) => updateSection(section.id, config)}
-                  />
-                )}
-              </div>
+              {section.type === "carousel" && (
+                <ReactivUpload
+                  config={section.config as Carousel}
+                  onChange={(config) => updateSection(section.id, config)}
+                />
+              )}
+              {section.type === "textarea" && (
+                <TextareaSectionUpload
+                  config={section.config as TextArea}
+                  onChange={(config) => updateSection(section.id, config)}
+                />
+              )}
+              {section.type === "cta" && (
+                <CTASectionUpload
+                  config={section.config as CTA}
+                  onChange={(config) => updateSection(section.id, config)}
+                />
+              )}
             </div>
           ))}
         </div>
-      </MobilePreview>
+        <div>
+          <h3 className="mb-[2rem] font-semibold text-white">Mobile Preview</h3>
+          <MobilePreview>
+            <div className="flex flex-col gap-4 w-full max-w-xs mt-2 sm:max-w-md">
+              {sections.map((section, index) => (
+                <div
+                  key={section.id}
+                  className="relative flex gap-5 flex-col sm:flex-row-reverse"
+                >
+                  <div className="flex justify-center gap-3 pt-2 pl-[0.5rem]">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="h-[1rem] w-[1rem]"
+                      disabled={index === 0}
+                      onClick={() => moveSection(index, -1)}
+                      aria-label="move up"
+                    >
+                      <ChevronUp className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="h-[1rem] w-[1rem]"
+                      disabled={index === sections.length - 1}
+                      onClick={() => moveSection(index, 1)}
+                      aria-label="move down"
+                    >
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      type="button"
+                      className="bg-red-200 text-red-600 hover:bg-red-300 border border-red-600 h-[1rem] w-[1rem]"
+                      onClick={() => deleteSection(section.id)}
+                    >
+                      x
+                    </Button>
+                  </div>
+                  <div className="flex-1 relative">
+                    {section.type === "carousel" && (
+                      <ReactivCarousel
+                        config={section.config as Carousel}
+                        onChange={(config) => updateSection(section.id, config)}
+                      />
+                    )}
+                    {section.type === "textarea" && (
+                      <TextaraSection
+                        config={section.config as TextArea}
+                        onChange={(config) => updateSection(section.id, config)}
+                      />
+                    )}
+                    {section.type === "cta" && (
+                      <CTASection
+                        config={section.config as CTA}
+                        onChange={(config) => updateSection(section.id, config)}
+                      />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </MobilePreview>
+        </div>
+      </div>
     </div>
   );
 };
