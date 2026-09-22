@@ -159,12 +159,12 @@ const Home = () => {
         </p>
       )}
       <Separator className="border-1 border-white border-dashed m-[1.5rem]" />
-      <div className="flex gap-[5rem]">
+      <div className="flex flex-col gap-[5rem] md:flex-row md:gap-[1rem] lg:gap-[3rem]">
         <div
           data-testid="upload-section"
           className="flex flex-col space-y-[8rem]"
         >
-          <h3 className="mb-[2rem] font-semibold text-white">Editor</h3>
+          <h2 className="mb-[2rem] font-semibold text-white">Editor</h2>
           {sections.map((section) => (
             <div
               key={section.id}
@@ -192,7 +192,7 @@ const Home = () => {
           ))}
         </div>
         <div>
-          <h3 className="mb-[2rem] font-semibold text-white">Mobile Preview</h3>
+          <h2 className="mb-[2rem] font-semibold text-white">Mobile Preview</h2>
           <MobilePreview>
             <div className="flex flex-col gap-4 w-full max-w-xs mt-2 sm:max-w-md">
               {sections.map((section, index) => (

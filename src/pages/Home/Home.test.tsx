@@ -10,7 +10,7 @@ const mockMoveSection = vi.fn();
 const mockExportConfig = vi.fn();
 const mockImportConfig = vi.fn();
 
-vi.mock("../../Contexts/HomeContext", () => ({
+vi.mock("../../contexts/HomeContext", () => ({
   usePreview: () => ({
     sections: [
       { id: "1", type: "carousel", config: { images: [] } },

@@ -34,7 +34,10 @@ const ReactivUpload = (props: ReactivCarouselProps) => {
   };
 
   return (
-    <div data-testid="edit-section" className="flex flex-col-reverse">
+    <div
+      data-testid="edit-section"
+      className="flex flex-col-reverse w-full max-w-xs mx-auto"
+    >
       <SelectDropdown
         value={display}
         onChange={handleDisplayChange}
@@ -78,7 +81,7 @@ const ReactivUpload = (props: ReactivCarouselProps) => {
       >
         Upload images for your carousel below.
       </p>
-      <h4 className="mb-[0.5rem] font-semibold">Image Carousel</h4>
+      <h3 className="mb-[0.5rem] font-semibold">Image Carousel</h3>
     </div>
   );
 };

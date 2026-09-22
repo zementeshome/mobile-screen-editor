@@ -1,4 +1,4 @@
-# Reactiv Home Screen Editor
+# Mobile Home Screen Editor
 
 React web application that lets users preview and modify an example mobile app
 home screen in real time, with the ability to configure three elements: a carousel, a text section and CTA section.

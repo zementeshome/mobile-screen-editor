@@ -23,7 +23,12 @@ const CTASection = ({ config }: CTASectionProps) => {
         data-testid="cta-user"
         onClick={(e) => !urlChecker(href) && e.preventDefault()}
       >
-        <a href={href} target="_blank" rel="noopener noreferrer">
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="cta-section-link-url"
+        >
           {label || "Button preview"}
         </a>
       </Button>

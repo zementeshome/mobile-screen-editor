@@ -19,7 +19,7 @@ const TextareaSectionUpload = ({ config, onChange }: TextAreaSectionProps) => {
       data-testid="textarea-container"
     >
       <div className="flex flex-col gap-2">
-        <h4 className="mb-[0.5rem] font-semibold">Title & Description</h4>
+        <h3 className="mb-[0.5rem] font-semibold">Title & Description</h3>
         <Input
           placeholder="Title"
           value={title}

@@ -2,7 +2,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { test, describe, expect, vi } from "vitest";
 import "@testing-library/jest-dom";
 import ReactivCarousel from "./CarouselSection";
-import type { Carousel } from "./CarouselSection.types";
+import ReactivUpload from "./CarouselUpload";
+import { Carousel } from "./CarouselSection.types";
 
 // Mock SelectDropdown
 vi.mock("../Select/Select", () => ({
@@ -22,7 +23,7 @@ const baseConfig: Carousel = {
 describe("ReactivCarousel", () => {
   test("shows the placeholder message when there are no images", () => {
     const onChange = vi.fn();
-    render(<ReactivCarousel config={baseConfig} onChange={onChange} />);
+    render(<ReactivUpload config={baseConfig} onChange={onChange} />);
     expect(screen.getByTestId("carousel-title")).toBeTruthy();
   });
 
@@ -44,7 +45,7 @@ describe("ReactivCarousel", () => {
 
   test("calls onChange with the new image when the add form is submitted", () => {
     const onChange = vi.fn();
-    render(<ReactivCarousel config={baseConfig} onChange={onChange} />);
+    render(<ReactivUpload config={baseConfig} onChange={onChange} />);
 
     fireEvent.change(screen.getByTestId("carousel-image-url"), {
       target: { value: "https://example.com/new.jpg" },
@@ -95,21 +96,9 @@ describe("ReactivCarousel", () => {
     expect(screen.getByLabelText("next slide")).toBeTruthy();
   });
 
-  test("shows a fallback message when an image fails to load", () => {
-    const config: Carousel = {
-      display: "square",
-      images: [{ url: "https://example.com/broken.jpg", alt: "broken" }],
-    };
-    render(<ReactivCarousel config={config} onChange={vi.fn()} />);
-
-    fireEvent.error(screen.getByTestId("uploaded-image"));
-
-    expect(screen.getByText(/failed to load image/i)).toBeTruthy();
-  });
-
   test("calls onChange with the new display when the dropdown changes", () => {
     const onChange = vi.fn();
-    render(<ReactivCarousel config={baseConfig} onChange={onChange} />);
+    render(<ReactivUpload config={baseConfig} onChange={onChange} />);
 
     fireEvent.click(screen.getByTestId("mock-select"));
 

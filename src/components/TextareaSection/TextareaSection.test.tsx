@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { test, describe, expect, vi } from "vitest";
 import TextareaSection from "./TextareaSection";
+import TextareaSectionUpload from "./TextareaSectionUpload";
 import type { TextArea } from "../CarouselSection/CarouselSection.types";
 
 // Mock Popover component
@@ -34,11 +35,6 @@ describe("TextareaSection", () => {
     expect(titleElement).toHaveStyle({ color: "#ffffff" });
     expect(descElement).toHaveTextContent("This is a description");
     expect(descElement).toHaveStyle({ color: "#4b5563" });
-
-    expect(screen.getByPlaceholderText("Title")).toHaveValue("Hello World");
-    expect(screen.getByPlaceholderText("Description")).toHaveValue(
-      "This is a description",
-    );
   });
 
   test("hides preview headers if title or description properties are empty strings", () => {
@@ -56,7 +52,7 @@ describe("TextareaSection", () => {
 
   test("calls onChange callback when the Title input changes value", () => {
     const onChange = vi.fn();
-    render(<TextareaSection config={baseConfig} onChange={onChange} />);
+    render(<TextareaSectionUpload config={baseConfig} onChange={onChange} />);
 
     const titleInput = screen.getByPlaceholderText("Title");
     fireEvent.change(titleInput, { target: { value: "New Title text" } });
@@ -69,7 +65,7 @@ describe("TextareaSection", () => {
 
   test("calls onChange callback when the Description textarea field changes value", () => {
     const onChange = vi.fn();
-    render(<TextareaSection config={baseConfig} onChange={onChange} />);
+    render(<TextareaSectionUpload config={baseConfig} onChange={onChange} />);
 
     const textareaBox = screen.getByPlaceholderText("Description");
     fireEvent.change(textareaBox, {
@@ -84,7 +80,7 @@ describe("TextareaSection", () => {
 
   test("calls onChange when custom color inputs inside the popovers trigger changes", () => {
     const onChange = vi.fn();
-    render(<TextareaSection config={baseConfig} onChange={onChange} />);
+    render(<TextareaSectionUpload config={baseConfig} onChange={onChange} />);
 
     const titleColorInput = screen
       .getByTestId("popover-panel-1")

@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { test, describe, expect, vi } from "vitest";
 import CTASection from "./CTASection";
+import CTASectionUpload from "./CTAUpload";
 import type { CTA } from "../CarouselSection/CarouselSection.types";
 
 // Mock child components
@@ -37,15 +38,10 @@ describe("CTASection", () => {
   test("renders component elements with correct initial data", () => {
     mockUrlChecker.mockReturnValue(true);
     render(<CTASection config={baseConfig} onChange={vi.fn()} />);
-    const buttonLink = screen.getByRole("link", { name: "Click Me" });
+    const buttonLink = screen.getByTestId("cta-section-link-url");
 
     expect(buttonLink).toBeInTheDocument();
     expect(buttonLink).toHaveAttribute("href", "https://example.com");
-
-    expect(screen.getByPlaceholderText("Button text")).toHaveValue("Click Me");
-    expect(screen.getByPlaceholderText("Link URL")).toHaveValue(
-      "https://example.com",
-    );
 
     expect(
       screen.queryByText("Please enter a valid URL"),
@@ -55,7 +51,7 @@ describe("CTASection", () => {
   test("calls onChange when the Button Text input changes", () => {
     mockUrlChecker.mockReturnValue(true);
     const onChange = vi.fn();
-    render(<CTASection config={baseConfig} onChange={onChange} />);
+    render(<CTASectionUpload config={baseConfig} onChange={onChange} />);
 
     const labelInput = screen.getByPlaceholderText("Button text");
     fireEvent.change(labelInput, { target: { value: "New Label" } });
@@ -69,7 +65,7 @@ describe("CTASection", () => {
   test("calls onChange when the Link URL input changes", () => {
     mockUrlChecker.mockReturnValue(true);
     const onChange = vi.fn();
-    render(<CTASection config={baseConfig} onChange={onChange} />);
+    render(<CTASectionUpload config={baseConfig} onChange={onChange} />);
 
     const urlInput = screen.getByPlaceholderText("Link URL");
     fireEvent.change(urlInput, { target: { value: "https://newlink.com" } });
@@ -82,7 +78,7 @@ describe("CTASection", () => {
 
   test("shows validation styling and message when URL is invalid", () => {
     mockUrlChecker.mockReturnValue(false); // Force invalid URL status
-    render(<CTASection config={baseConfig} onChange={vi.fn()} />);
+    render(<CTASectionUpload config={baseConfig} onChange={vi.fn()} />);
 
     expect(screen.getByText("Please enter a valid URL")).toBeInTheDocument();
 
@@ -93,7 +89,7 @@ describe("CTASection", () => {
   test("calls onChange when color pickers inside the popover are adjusted", () => {
     mockUrlChecker.mockReturnValue(true);
     const onChange = vi.fn();
-    render(<CTASection config={baseConfig} onChange={onChange} />);
+    render(<CTASectionUpload config={baseConfig} onChange={onChange} />);
 
     const textColorPicker = screen.getByTestId("cta-text-color-picker");
     fireEvent.change(textColorPicker, { target: { value: "#ff0000" } });

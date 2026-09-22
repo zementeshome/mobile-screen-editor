@@ -19,7 +19,7 @@ const CTASectionUpload = ({ config, onChange }: CTASectionProps) => {
       className="flex flex-col gap-3 w-full max-w-xs mx-auto mb-[3rem]"
       data-testid="cta-section-upload"
     >
-      <h4 className="mb-[0.5rem] font-semibold">Button</h4>
+      <h3 className="mb-[0.5rem] font-semibold">Button</h3>
       <Input
         placeholder="Button text"
         value={label}
